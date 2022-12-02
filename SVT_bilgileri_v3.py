@@ -1,3 +1,14 @@
+"""
+SVT alınacak saha için gerekli bilgilerin yeni bir excel de toplanmasını sağlamakta
+çalışması için mail ile gelen 2G  , 3G , 4G nokia cell patameters excel lerine ihtiyaç duymakta 
+	... ile db lerin olduğu klasörü seç (oluşturulacak excel de bu klasöre kaydedilir)
+	2G için dbyi seç
+	3G için db yi seç
+	4G için Db yi seç
+	saha simini gir örnek --> AN0124 
+	seç e bas 
+	koş a bas
+"""
 import pandas as pd
 
 import glob
