@@ -23,11 +23,11 @@ tahminModeli.fit(x,y)
 
 #plotları çizdiriyoruz , çizdirmesk de olur , zaten model bunlardan bağımsız olarak oluşturuldu . 
 #cizdirmek bize görsel olarak bir çıktı veriyor ve veriyi görselleştirip anlamamızı sağlıyor .
-def Grafik():
-    sns.regplot(x="MetreKare", y="fiyatlar", data=df,line_kws={"color": "red"}) 
-    plt.xlabel("m" + "\u00B2")
-    plt.ylabel("Fiyat")
-    plt.show()
+
+sns.regplot(x="MetreKare", y="fiyatlar", data=df,line_kws={"color": "red"}) 
+plt.xlabel("m" + "\u00B2")
+plt.ylabel("Fiyat")
+plt.show()
 
 #predict() ile eğitilen model için tahmin alabiliyoruz.
 M2 = int(input ("Fiyat tahmini istediğiniz m\u00B2 yi giriniz :  "))
