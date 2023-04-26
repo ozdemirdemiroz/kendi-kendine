@@ -1,6 +1,5 @@
-
-
 import numpy as np
+
 # from numpy import random
 liste = [1, 2, 3, 4, 5, 6, 7, 8]
 print(f"liste\n {liste}\n")
@@ -27,3 +26,7 @@ print ("Arimetrik:\t", np.mean(random_matris))
 print ("Medyan:\t\t", np.median(random_matris))
 print("Varyans:\t", np.var(random_matris))
 print("Standart Sapma:\t", np.std(random_matris))
+
+
+
+print(np.eye(5))
