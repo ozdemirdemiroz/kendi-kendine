@@ -126,3 +126,65 @@ select * from
 (select t1.*,t2.toplam from bolumler t1 left join 
 (select bolum_no , sum(urun_sayisi) as toplam from urunler group by bolum_no) t2 on t1.bolum_no=t2.bolum_no) t3
 where toplam>15
+
+
+/* ------------------------------------------------*/
+/* gün3 */
+
+/* Değişken tanımlama */
+
+declare @bolum_no_degiskeni int  /* @değişkenİsmi ile değişken tanımlıyoruz */
+set @bolum_no_degiskeni = 1      /* değer atadık */
+select * from Bolumler where bolum_no=@bolum_no_degiskeni /* bu değişkene eşit olanları çektik  */
+
+/* Değişken tanımlayarak yeni satır ekleme */
+declare @bolum_no_degiskeni int
+set @bolum_no_degiskeni = 7
+declare @bolum_adi_degiskeni nchar(50)
+set @bolum_adi_degiskeni  = 'Mobilya'
+insert into bolumler values (@bolum_no_degiskeni ,@bolum_adi_degiskeni)
+/* ------------------------------------------------*/
+
+/* Değişken tanımlayarak bir sorgu çalıştırma */
+
+declare @tablo_adi varchar(50)
+set @tablo_adi = 'bolumler'
+declare @sorgu varchar(50)
+set @sorgu = 'select * from ' +@tablo_adi
+execute (@sorgu)
+/* ------------------------------------------------*/
+
+/* sorgu arasında aritmetik işlem yapmak */
+SELECT SUM(toplam_tutar) from (select urun_no, urun_adi,urun_sayisi,urun_fiyat, urun_sayisi * urun_fiyat as toplam_tutar from urunler) t1
+
+/* IF ELSE */
+/* ürün fiyatı 200 den düşükleri saydırıp eğer varsa urun sayısını yazdırmak*/
+declare @urun_sayisi varchar(50)
+set @urun_sayisi = COUNT(*) from urunler where urun_fiyat<200
+
+IF @urun_sayisi>0
+	print 'fiyatı 200 den az '+@urun_sayisi+' ürün vardır'
+ELSE
+	print 'fiyatı 200 den az ürün yoktur'
+
+/* case when */
+
+select 
+* ,
+CASE 
+	WHEN urun_fiyat<500 then 'düşük' 
+    WHEN urun_fiyat>500 and urun_fiyat<1000 then 'orta' 
+    ELSE 'yüksek'
+END as durum
+from urunler
+
+/* stored procedure */
+CREATE PROCEDURE sp_urunlerilistele (@urun_sayisi int)
+ as
+begin
+ select * from urunler where urun_sayisi>@urun_sayisi	
+ end
+ 
+ /* PROCEDURE u oluşturduk şimdi kullanalım  */
+ 
+ exec sp_urunlerilistele 4 /* urun sayısı >4 olanları listeler , forksiyon oluşrup kullanmak gibi*/
